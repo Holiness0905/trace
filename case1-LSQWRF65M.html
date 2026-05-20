@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>奥利维尔空调 - 风冷模块机组追溯</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #0052A5 0%, #003d7a 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+        .page { max-width: 100%; margin: 0 auto; background: #f5f5f5; min-height: 100vh; }
+        .header {
+            background: linear-gradient(135deg, #0052A5 0%, #003d7a 100%);
+            color: white;
+            padding: 32px 20px 24px;
+            text-align: center;
+        }
+        .logo { font-size: 48px; margin-bottom: 12px; }
+        .header h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+        .header .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .product-card {
+            background: white;
+            margin: -20px 16px 12px;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+        .product-row:last-child { border-bottom: none; }
+        .product-row .label { color: #999; }
+        .product-row .value { color: #333; font-weight: 600; }
+        .section {
+            background: white;
+            margin: 12px 16px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .section-title {
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .icon {
+            width: 28px;
+            height: 28px;
+            background: #0052A5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        .info-list { padding: 8px 16px; }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f8f8f8;
+            font-size: 13px;
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-item .key { color: #666; flex-shrink: 0; width: 90px; }
+        .info-item .val { color: #333; text-align: right; flex: 1; line-height: 1.5; }
+        .test-list { padding: 8px 16px; }
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+        .test-item:last-child { border-bottom: none; }
+        .test-name { color: #333; }
+        .test-result {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .test-value { color: #059669; font-weight: 600; }
+        .pass-badge {
+            background: #10b981;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .quality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: #f0f0f0;
+        }
+        .quality-item {
+            background: white;
+            padding: 16px;
+            text-align: center;
+        }
+        .quality-item .cert {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .quality-item .code {
+            font-size: 14px;
+            color: #0052A5;
+            font-weight: 600;
+        }
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 20px 16px;
+            text-align: center;
+            margin-top: 12px;
+        }
+        .footer .company {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .footer .info {
+            font-size: 11px;
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+        .notice {
+            background: #fef3c7;
+            margin: 12px 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #92400e;
+            text-align: center;
+            border-left: 4px solid #f59e0b;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <div class="logo">❄️</div>
+        <h1>奥利维尔空调设备</h1>
+        <div class="tag">✓ 全生命周期质量追溯</div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-row">
+            <span class="label">产品名称</span>
+            <span class="value">空调机组</span>
+        </div>
+        <div class="product-row">
+            <span class="label">产品类型</span>
+            <span class="value">风冷模块机组</span>
+        </div>
+        <div class="product-row">
+            <span class="label">产品规格</span>
+            <span class="value">LSQWRF65M</span>
+        </div>
+        <div class="product-row">
+            <span class="label">生产批次</span>
+            <span class="value">2026-05-001</span>
+        </div>
+        <div class="product-row">
+            <span class="label">出厂编号</span>
+            <span class="value">OEL-20260520088</span>
+        </div>
+        <div class="product-row">
+            <span class="label">生产日期</span>
+            <span class="value">2026年5月18日</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">📦</div>
+            原材料追溯
+        </div>
+        <div class="info-list">
+            <div class="info-item">
+                <span class="key">压缩机</span>
+                <span class="val">谷轮涡旋 · 批次ZY202604</span>
+            </div>
+            <div class="info-item">
+                <span class="key">换热器</span>
+                <span class="val">高效翅片式 · 内螺纹铜管</span>
+            </div>
+            <div class="info-item">
+                <span class="key">风机电机</span>
+                <span class="val">轴流风机 · 外转子电机</span>
+            </div>
+            <div class="info-item">
+                <span class="key">制冷剂</span>
+                <span class="val">R410A环保制冷剂</span>
+            </div>
+            <div class="info-item">
+                <span class="key">钣金外壳</span>
+                <span class="val">宝钢镀锌钢板 · DX51D+Z</span>
+            </div>
+            <div class="info-item">
+                <span class="key">控制器</span>
+                <span class="val">微电脑智能控制 · V3.2</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">⚙️</div>
+            生产过程
+        </div>
+        <div class="info-list">
+            <div class="info-item">
+                <span class="key">生产线</span>
+                <span class="val">模块机专线 · 班组长王建国</span>
+            </div>
+            <div class="info-item">
+                <span class="key">焊接工艺</span>
+                <span class="val">自动火焰钎焊 · 氮气保护</span>
+            </div>
+            <div class="info-item">
+                <span class="key">真空干燥</span>
+                <span class="val">≤3Pa · 持续60分钟</span>
+            </div>
+            <div class="info-item">
+                <span class="key">充注量</span>
+                <span class="val">R410A · 12.5kg</span>
+            </div>
+            <div class="info-item">
+                <span class="key">检验员</span>
+                <span class="val">李明华 (工号: 0856)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">✅</div>
+            出厂检验报告
+        </div>
+        <div class="test-list">
+            <div class="test-item">
+                <span class="test-name">名义制冷量</span>
+                <div class="test-result">
+                    <span class="test-value">65kW</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">名义制热量</span>
+                <div class="test-result">
+                    <span class="test-value">70kW</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">制冷消耗功率</span>
+                <div class="test-result">
+                    <span class="test-value">19.8kW</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">制热消耗功率</span>
+                <div class="test-result">
+                    <span class="test-value">21.5kW</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">IPLV(H)</span>
+                <div class="test-result">
+                    <span class="test-value">4.21</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">制冷能效比(EER)</span>
+                <div class="test-result">
+                    <span class="test-value">3.28</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">制热能效比(COP)</span>
+                <div class="test-result">
+                    <span class="test-value">3.26</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">噪声</span>
+                <div class="test-result">
+                    <span class="test-value">68dB(A)</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">最大运行制冷</span>
+                <div class="test-result">
+                    <span class="test-value">正常运行</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="test-name">最大运行制热</span>
+                <div class="test-result">
+                    <span class="test-value">正常运行</span>
+                    <span class="pass-badge">合格</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">🏆</div>
+            质量认证
+        </div>
+        <div class="quality-grid">
+            <div class="quality-item">
+                <div class="cert">质量管理</div>
+                <div class="code">ISO 9001:2015</div>
+            </div>
+            <div class="quality-item">
+                <div class="cert">环境管理</div>
+                <div class="code">ISO 14001:2015</div>
+            </div>
+            <div class="quality-item">
+                <div class="cert">职业健康</div>
+                <div class="code">ISO 45001:2018</div>
+            </div>
+            <div class="quality-item">
+                <div class="cert">保修政策</div>
+                <div class="code">整机6年 压缩机10年</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice">
+        本二维码为产品唯一身份标识<br>
+        扫码可查看完整生产履历与质量检测记录
+    </div>
+
+    <div class="footer">
+        <div class="company">江苏奥利维尔环境设备有限公司</div>
+        <div class="info">
+            全生命周期追溯管理系统 V2.0<br>
+            数据生成: 2026-05-20 22:35<br>
+            追溯有效期: 15年
+        </div>
+    </div>
+</div>
+</body>
+</html>
